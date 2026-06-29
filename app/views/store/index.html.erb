@@ -1,0 +1,38 @@
+<div class="w-full max-w-5xl mx-auto px-6">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice">
+      <%= notice %>
+    </p>
+  <% end %>
+
+  <h1 class="font-bold text-xl mb-8 pb-2 border-b-4 border-black">
+    Your Pragmatic Catalog
+  </h1>
+
+  <ul>
+    <% cache @products  do %>
+      <% @products.each do |product| %>
+        <% cache product do %>
+          <li class="flex gap-8 mb-10 border-b border-black pb-8">
+            <%= image_tag(product.image,
+                          class: "object-contain w-48 h-64 shadow flex-shrink-0") %>
+
+            <div class="min-w-0">
+              <h2 class="font-bold text-2xl mb-4 pb-2 border-b-2 border-black">
+                <%= product.title %>
+              </h2>
+
+              <p class="mb-4 leading-relaxed">
+                <%= sanitize(product.description) %>
+              </p>
+
+              <div class="font-semibold text-xl">
+                <%= number_to_currency(product.price) %>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      <% end %>
+    <% end %>
+  </ul>
+</div>
