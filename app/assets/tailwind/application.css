@@ -1,1 +1,7 @@
 @import "tailwindcss";
+
+@source "../../../app/views/**/*.erb";
+@source "../../../app/helpers/**/*.rb";
+@source "../../../app/javascript/**/*.js";
+
+@source inline("bg-green-600 text-white rounded-lg py-1 px-2 ml-4");

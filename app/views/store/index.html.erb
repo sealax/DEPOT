@@ -10,9 +10,9 @@
   </h1>
 
   <ul>
-    <% cache @products  do %>
+    <%# cache @products  do %>
       <% @products.each do |product| %>
-        <% cache product do %>
+        <%# cache product do %>
           <li class="flex gap-8 mb-10 border-b border-black pb-8">
             <%= image_tag(product.image,
                           class: "object-contain w-48 h-64 shadow flex-shrink-0") %>
@@ -26,13 +26,20 @@
                 <%= sanitize(product.description) %>
               </p>
 
-              <div class="font-semibold text-xl">
-                <%= number_to_currency(product.price) %>
+              <div class="mt-4 flex items-center gap-4">
+                <span class="font-semibold text-xl" >
+                  <%= number_to_currency(product.price) %>
+                </span>
+
+                <%= button_to "Add to Cart",
+                              line_items_path(product_id: product.id),
+                              form_class: "ml-6 inline",
+                              class: "bg-green-600 text-white rounded-lg py-1 px-2" %>
               </div>
             </div>
           </li>
-        <% end %>
+        <%# end %>
       <% end %>
-    <% end %>
+    <%# end %>
   </ul>
 </div>
