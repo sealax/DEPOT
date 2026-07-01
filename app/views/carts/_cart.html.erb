@@ -3,9 +3,12 @@
     Your Pragmatic Cart
   </h2>
 
-  <ul class="list-disc list-inside">
+  <ul class="list-none list-inside">
     <% cart.line_items.each do |item| %>
-      <li><%= item.product.title %></li>
+      <li><%= item.quantity %> &times; <%= item.product.title %></li>
     <% end %>
   </ul>
 </div>
+
+      <%= button_to 'Empty Cart', cart, method: :delete,
+class: 'ml-4 rounded-lg py-1 px-2 text-white bg-green-600'%>
