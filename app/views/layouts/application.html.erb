@@ -1,28 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title><%= content_for(:title) || "PragProg Books Online Store" %></title>
+    <title><%= content_for(:title) || "PragProg Books Online Store" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="application-name" content="Depot">
     <meta name="mobile-web-app-capable" content="yes">
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-tim
     <%= yield :head %>
-
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
 
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-
   <body>
     <header class="bg-green-700">
       <%= image_tag "logo.svg", alt: "The Pragmatic Bookshelf"%>
@@ -31,9 +26,12 @@ tim
 
     <section class="flex">
       <nav class="bg-green-900 p-6">
-        <div id="cart" class=bg-white rounded p-2">
-          <%= render @cart %>
+        <div id="cart" class="bg-white rounded p-2">
+            <% if @cart && @cart.line_items.any? %>
+              <%= render @cart %>
+          <% end %>
         </div>
+
         <ul class="text-gray-300 leading-8">
           <li>
             <%= Time.now.strftime("%B %d, %Y %H:%M:%S") %>
